@@ -28,5 +28,3 @@ workflows:
     jobs:
       - build-frontend
       - build-backend
-
-//nothing
