@@ -1,8 +1,15 @@
 version: 2.1
 orbs: 
-  node: 'circleci/node:4.1'
   slack: circleci/slack@4.10.1
             
+
+commands: 
+  notify_on_failure:
+    steps:
+      - slack/notify:
+          event: fail
+          channel: udapeople
+          template: basic_fail_1
 jobs:
   build-frontend:
     docker:
@@ -21,6 +28,7 @@ jobs:
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
+      - notify_on_failure
 
   build-backend:
     docker:
@@ -38,6 +46,7 @@ jobs:
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
+      - notify_on_failure
 
   test-frontend:
     docker:
@@ -52,6 +61,7 @@ jobs:
             cd frontend
             npm install
             npm run test
+      - notify_on_failure
 
                 
   test-backend:
@@ -67,6 +77,7 @@ jobs:
             cd backend
             npm install
             npm run test
+      - notify_on_failure
 
   scan-frontend:
     docker:
@@ -81,6 +92,7 @@ jobs:
             cd frontend
             npm install
             npm audit fix --audit-level=critical
+      - notify_on_failure
 
   scan-backend:
     docker:
@@ -95,18 +107,8 @@ jobs:
             cd backend
             npm install
             npm audit fix --audit-level=critical
-  deploy:
-    executor:
-      name: node/default
-    steps:
-      - checkout
-      - node/install-packages
-      - run:
-          command: npm run deploy
-      - slack/notify:
-          channel: udacity-project-3
-          event: fail
-          template: basic_fail_1
+      - notify_on_failure
+
 
 workflows:
   default:
@@ -121,5 +123,4 @@ workflows:
           requires: [build-frontend]
       - scan-backend:
           requires: [build-backend]
-      - deploy:
-          context: myUdacityProjectContext
+      
