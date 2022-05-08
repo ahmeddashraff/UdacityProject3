@@ -95,18 +95,18 @@ jobs:
             cd backend
             npm install
             npm audit fix --audit-level=critical
-    deploy:
-      executor:
-        name: node/default
-      steps:
-        - checkout
-        - node/install-packages
-        - run:
-            command: npm run deploy
-        - slack/notify:
-            channel: udacity-project-3
-            event: fail
-            template: basic_fail_1
+  deploy:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/install-packages
+      - run:
+          command: npm run deploy
+      - slack/notify:
+          channel: udacity-project-3
+          event: fail
+          template: basic_fail_1
 
 workflows:
   default:
