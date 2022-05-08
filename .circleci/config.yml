@@ -59,9 +59,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [frontend-build]
+          keys: [backend-build]
       - run:
-          name: Run frontend test
+          name: Run backend test
           command: |
             cd backend
             npm install
