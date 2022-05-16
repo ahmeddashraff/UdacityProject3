@@ -162,7 +162,7 @@ jobs:
           command: |
             cd .circleci/ansible
             ansible-playbook -i inventory.txt configure-server.yml
-      # Here's where you will add some code to rollback on failure      
+      - destroy-environment    
 
   run-migrations:
     docker:
@@ -187,26 +187,7 @@ jobs:
               fi
       - destroy-environment  
 
-  deploy-frontend:
-    docker:
-      # Docker image here that supports AWS CLI
-    steps:
-      # Checkout code from git
-      - run:
-          name: Install dependencies
-          command: |
-            # your code here
-      - run:
-          name: Get backend url
-          command: |
-            # your code here
-            export API_URL="http://${BACKEND_IP}:3030"
-            echo "${API_URL}"
-      - run:
-          name: Deploy frontend objects
-          command: |
-            # your code here
-      # Here's where you will add some code to rollback on failure  
+
 
 workflows:
   default:
