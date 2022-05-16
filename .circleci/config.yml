@@ -15,7 +15,6 @@ commands:
             aws cloudformation delete-stack --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:7}
 
 jobs:
-
   build-frontend:
     docker:
       - image: circleci/node:13.8.0
@@ -171,12 +170,12 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Run migrations
-          command: |
-            cd backend
-            npm install
-            npm audit fix --audit-level=critical
-            npm run migrations > migrations_dump.txt
+        name: Run migrations
+        command: |
+          cd backend
+          npm install
+          npm audit fix --audit-level=critical
+          npm run migrations > migrations_dump.txt
       - run:
           name: Send migration results to memstash
           command: |
