@@ -244,6 +244,8 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - checkout
+      - restore_cache:
+          keys: [frontend-build]
       - install_ansible
       - install_awscli
       - install_nodejs
