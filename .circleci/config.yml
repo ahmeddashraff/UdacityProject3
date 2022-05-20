@@ -3,6 +3,33 @@ orbs:
   slack: circleci/slack@4.10.1
 
 commands:
+
+    install_tar:
+      description: "install tar utility"
+      steps:
+        - run:
+            name: Installing necessary packages
+            command: |
+              sudo apt update
+              sudo apt install -y tar gzip curl software-properties-common
+    install_awscli:
+      description: "install aws cli"
+      steps:
+        - run:
+            name: Installing aws-cli
+            command: |
+              curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+              unzip awscliv2.zip
+              sudo ./aws/install
+    install_ansible:
+      description: "install ansible"
+      steps:
+        - run:
+            name: Installing ansible
+            command: |
+              sudo add-apt-repository --yes --update ppa:ansible/ansible
+              sudo apt install ansible
+
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
     parameters:
@@ -215,25 +242,11 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - checkout
-      - run: yum install -y tar gzip
+      - install_ansible
+      - install_awscli
+      - install_tar
       - attach_workspace:
           at: ~/
-      - run:
-          name: Install nodejs
-          command: |
-            apt install -y nodejs
-      - run:
-          name: Install ansible
-          command: |
-            apk add --update ansible
-      - run:
-          name: Install npm
-          command: |
-            npm install
-      - run:
-          name: Install aws cli
-          command: |
-            pip install awscli
       - run:
           name: Get backend url
           command: |
