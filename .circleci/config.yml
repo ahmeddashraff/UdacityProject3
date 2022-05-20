@@ -247,8 +247,7 @@ jobs:
       - install_ansible
       - install_awscli
       - install_nodejs
-      - attach_workspace:
-          at: ~/
+
       - run:
           name: Get backend url
           command: |
