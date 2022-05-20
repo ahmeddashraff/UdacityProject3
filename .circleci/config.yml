@@ -4,14 +4,14 @@ orbs:
 
 commands:
 
-  install_tar:
-    description: "install tar utility"
+  install_nodejs:
+    description: Install Node.js 13
     steps:
       - run:
-          name: Installing necessary packages
+          name: Install Node.js 13
           command: |
-            apt update
-            apt install -y tar gzip curl software-properties-common
+            curl -fsSL https://deb.nodesource.com/setup_13.x | sudo -E bash -
+            sudo apt install -y nodejs
   install_awscli:
     description: "install aws cli"
     steps:
@@ -27,8 +27,10 @@ commands:
       - run:
           name: Installing ansible
           command: |
-            add-apt-repository --yes --update ppa:ansible/ansible
-            apt install ansible
+            sudo apt update
+            sudo apt install software-properties-common -y
+            sudo add-apt-repository --yes --update ppa:ansible/ansible
+            sudo apt install ansible -y
 
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
@@ -244,7 +246,7 @@ jobs:
       - checkout
       - install_ansible
       - install_awscli
-      - install_tar
+      - install_nodejs
       - attach_workspace:
           at: ~/
       - run:
