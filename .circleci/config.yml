@@ -208,6 +208,8 @@ jobs:
               fi
       - destroy-environment  
 
+
+
   deploy-frontend:
     docker:
       - image: amazon/aws-cli
@@ -217,14 +219,13 @@ jobs:
       - attach_workspace:
           at: ~/
       - run:
-          name: Install nodejs npm
+          name: Install nodejs
           command: |
-            apk add --update curl nodejs npm
+            apt install -y nodejs
       - run:
           name: Install ansible
           command: |
             apk add --update ansible
-  
       - run:
           name: Install npm
           command: |
