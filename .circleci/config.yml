@@ -241,7 +241,7 @@ jobs:
 
   deploy-frontend:
     docker:
-      - image: cimg/base:2022.04 
+      - image: amazon/aws-cli
     steps:
       - checkout
       - restore_cache:
