@@ -240,11 +240,12 @@ jobs:
 
   deploy-frontend:
     docker:
-      - image: amazon/aws-cli
+      - image: cimg/base:stable
     steps:
       - checkout
       - restore_cache:
           keys: [frontend-build]
+      - install_awscli
       - install_nodejs
       - run:
           name: Install dependencies
