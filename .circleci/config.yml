@@ -279,6 +279,8 @@ jobs:
       - install_awscli
       - install_nodejs
       - install_ansible
+      - restore_cache:
+          keys: [backend-build]    
       - add_ssh_keys:
           fingerprints: ["c8:d6:89:d2:47:0e:f7:38:7b:e1:13:da:6c:19:2d:3a"]
       - attach_workspace:
@@ -288,19 +290,21 @@ jobs:
           command: |
             cd backend
             npm install
+      - run : 
+            name: package backend
+            command: |
+              cd backend
+              npm run build
+              tar -czf artifact.tar.gz dist/* package*
+              cd ..
+              cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files
       - run:
           name: Deploy backend
           command: |
-            cd backend
-            npm i
-            npm run build
-            cd ..
-            tar -C backend -czvf artifact.tar.gz .
             cd .circleci/ansible
             echo "Contents  of the inventory.txt file is -------"
             cat inventory.txt
             ansible-playbook -i inventory.txt deploy-backend.yml
-
       - destroy-environment
 
 
