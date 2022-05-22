@@ -160,10 +160,10 @@ jobs:
             npm audit fix --audit-level=critical
   deploy-infrastructure:
     docker: 
-      - image: cimg/base:2022.04 
+      - image: amazon/aws-cli
     steps:
       - checkout
-      - install_awscli
+      - run: yum install -y tar gzip
       - run:
           name: Ensure back-end infrastructure exists
           command: |
