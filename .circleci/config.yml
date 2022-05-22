@@ -310,11 +310,14 @@ jobs:
 
   smoke-test:
     docker:
-      - image: cimg/base:2022.04 
+      - image: alpine:latest
     steps:
       - checkout
-      - install_awscli
-      - install_nodejs
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --update curl
+            pip install awscli
       - run:
           name: Backend smoke test.
           command: |
