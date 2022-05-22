@@ -310,7 +310,7 @@ jobs:
 
   smoke-test:
     docker:
-      - image: cimg/base:2022.04 
+      - image: cimg/base:stable
     steps:
       - checkout
       - install_awscli
