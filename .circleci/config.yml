@@ -312,7 +312,6 @@ jobs:
       - revert-migrations
 
   smoke-test:
-  #ayhaga
     docker:
       - image: cimg/base:2022.04 
     steps:
