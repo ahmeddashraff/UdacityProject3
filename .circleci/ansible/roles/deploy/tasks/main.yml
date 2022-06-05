@@ -11,11 +11,11 @@
 
 - name: "Installing Node Dependencies"
   shell: |
-    cd ~/backend-app
+    cd /home/ubuntu/backend
     npm i
 - name: "Executing Node app with PM2"
   shell: |
-    cd ~/backend-app/dist
+    cd /home/ubuntu/backend/dist
     pm2 stop default
     pm2 start main.js
   register: execute_node
