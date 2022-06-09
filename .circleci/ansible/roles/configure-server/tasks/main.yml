@@ -11,6 +11,11 @@
   apt:
     update_cache: yes
 
+- name: "Remove dependencies that are no longer required"
+  become: true
+  apt:
+    autoremove: yes
+    
 - name: "installing nodejs"
   become: true
   apt:
@@ -31,7 +36,12 @@
     name: n
     global: yes
     production: yes
-    
+
+
+- name: "install nodejs 13.8.0"
+  become: true
+  shell: n 13.8.0
+
 - name: "install pm2"
   become: true
   npm:
@@ -40,11 +50,3 @@
     production: yes
     state: present
 
-- name: "install nodejs 13.8.0"
-  become: true
-  shell: n 13.8.0
-
-- name: "Remove dependencies that are no longer required"
-  become: true
-  apt:
-    autoremove: yes
