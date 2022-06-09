@@ -7,13 +7,14 @@
 
 - name: "update apt"
   become: yes
+  become_method: sudo
   apt:
     update_cache: yes
 
 - name: "install dependencies."
   become: true
   apt:
-    name: ["nodejs", "npm"]
+    name: ["npm"]
     state: latest
     update_cache: yes
 
