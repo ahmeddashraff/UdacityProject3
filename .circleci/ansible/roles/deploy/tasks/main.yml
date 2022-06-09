@@ -19,7 +19,7 @@
   shell: |      
       cd /home/ubuntu/backend/dist
       pm2 stop default
-      pm2 start npm -- start
+      pm2 start main.js
 
 - name: "Configure pm2 to start as service"
   become: true
