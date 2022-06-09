@@ -14,7 +14,7 @@
     cd /home/ubuntu/backend
     npm i
     
-- name: start app 
+- name: "start app" 
   become: yes
   shell: |      
       cd /home/ubuntu/backend/dist
