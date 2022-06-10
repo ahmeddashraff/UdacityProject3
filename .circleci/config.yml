@@ -200,17 +200,13 @@ jobs:
 
   configure-infrastructure:
     docker: 
-      - image: python:3.7-alpine3.11
+      - image: - image: cimg/base:2022.04
     steps:
       - checkout
       - add_ssh_keys:
           fingerprints: ["c8:d6:89:d2:47:0e:f7:38:7b:e1:13:da:6c:19:2d:3a"]
       - attach_workspace:
           at: ~/
-      - run:
-          name: Install dependencies
-          command: |
-            apk add --update ansible 
       - run:
           name: Configure server
           command: |
