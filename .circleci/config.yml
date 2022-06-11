@@ -360,11 +360,6 @@ jobs:
       - attach_workspace:
           at: ~/
       - run:
-          name: Install dependencies
-          command: |
-            # your code here
-            
-      - run:
           name: Update cloudfront distribution
           command: |
             export OldWorkflowID="$(aws cloudformation \
