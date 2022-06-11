@@ -280,8 +280,8 @@ jobs:
     steps:
       - checkout
       - install_awscli
-      - install_nodejs
       - install_ansible   
+      - install_nodejs
       - add_ssh_keys:
           fingerprints: ["c8:d6:89:d2:47:0e:f7:38:7b:e1:13:da:6c:19:2d:3a"]
       - attach_workspace:
