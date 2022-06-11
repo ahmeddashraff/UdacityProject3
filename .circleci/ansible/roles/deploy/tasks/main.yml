@@ -9,18 +9,15 @@
   args:
     chdir: /home/ubuntu
 
-- name: "install nodejs 13.8.0"
-  become: true
-  shell: n 13.8.0
-
+- name: "installing node"
+  shell: |
+      cd /home/ubuntu/backend
+      npm i
 - name: "excuting with pm"
   shell: |
       cd /home/ubuntu/backend/dist
       pm2 stop default
-      pm2 startup systemd
-      pm2 start npm -- start
       pm2 start main.js
-      
 - name: "pm2 server start"
   become: true
   shell: |
