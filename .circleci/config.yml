@@ -359,15 +359,6 @@ jobs:
       - install_nodejs
       - attach_workspace:
           at: ~/
-  cloudfront-update:
-    docker:
-      - image: cimg/base:2022.04
-    steps:
-      - checkout
-      - install_awscli
-      - install_nodejs
-      - attach_workspace:
-          at: ~/
       - run:
           name: Saving the old WorkflowID to KVDB bucket
           command: |
