@@ -378,9 +378,6 @@ jobs:
             --tags project=udapeople    
       - destroy-environment
       - revert-migrations
-
-      - destroy-environment
-      - revert-migrations
 workflows:
   default:
     jobs:
