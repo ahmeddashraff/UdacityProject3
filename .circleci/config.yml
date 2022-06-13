@@ -372,7 +372,6 @@ jobs:
             --stack-name InitialStack \
             --parameter-overrides WorkflowID="udapeople-cf-${CIRCLE_WORKFLOW_ID:0:7}" \
             --tags project=udapeople
-
       - destroy-environment
       - revert-migrations
 workflows:
