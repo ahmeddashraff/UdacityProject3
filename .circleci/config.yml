@@ -1,6 +1,5 @@
 version: 2.1
 orbs: 
-  node: circleci/node@5.0.2
   slack: circleci/slack@4.10.1
 
 commands:
@@ -72,6 +71,7 @@ commands:
           channel: udacity-project-3  
           event: fail
           template: basic_fail_1
+
 
 jobs:
   build-frontend:
