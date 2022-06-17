@@ -66,11 +66,11 @@ commands:
             fi
     
   notify_on_failure:
-  steps:
-    - slack/notify:
-        channel: udacity-project-3  
-        event: fail
-        template: basic_fail_1
+    steps:
+      - slack/notify:
+          channel: udacity-project-3  
+          event: fail
+          template: basic_fail_1
 
 jobs:
   build-frontend:
