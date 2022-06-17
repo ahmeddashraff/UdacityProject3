@@ -397,7 +397,7 @@ jobs:
 
               echo Stack names: "${STACKS[@]}"
 
-              if [[ "${OldWorkflowID}" =~ "${STACKS[@]}" ]]
+              if [[ "${OldWorkflowID}" != "<< pipeline.parameters.workflow-id >>" ]]
               then
                 echo '----------------------------deleted----------------------------'
                 aws s3 rm "s3://udapeople-${OldWorkflowID}" --recursive
