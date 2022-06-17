@@ -122,7 +122,8 @@ jobs:
             cd frontend
             npm install
             npm run test
-    - notify_on_failure
+
+      - notify_on_failure
 
                 
   test-backend:
@@ -138,7 +139,7 @@ jobs:
             cd backend
             npm install
             npm run test
-    - notify_on_failure
+      - notify_on_failure
   scan-frontend:
     docker:
       - image: circleci/node:13.8.0
@@ -153,7 +154,7 @@ jobs:
             npm install
             npm audit fix --force --audit-level=critical
             npm audit --audit-level=critical
-    - notify_on_failure
+      - notify_on_failure
 
   scan-backend:
     docker:
@@ -170,7 +171,7 @@ jobs:
             npm audit fix --force --audit-level=critical
             npm audit fix --force --audit-level=critical
             npm audit --audit-level=critical
-    - notify_on_failure
+      - notify_on_failure
 
   deploy-infrastructure:
     docker: 
