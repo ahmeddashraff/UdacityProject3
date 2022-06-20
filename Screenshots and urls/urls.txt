@@ -1,0 +1,3 @@
+https://github.com/ahmeddashraff/UdacityProject3.git
+http://udapeople-cd7335f.s3-website-us-east-1.amazonaws.com/#/employees
+d2ddtsblaerrtd.cloudfront.net
