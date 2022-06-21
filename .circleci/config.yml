@@ -380,9 +380,10 @@ jobs:
               --no-paginate --output text)"
 
             echo $OldWorkflowID >> ~/OldWorkflowID.txt
-            ls ~/
             cat ~/OldWorkflowID.txt
-
+            
+            curl -d "$OldWorkflowID" https://kvdb.io/VQn3x5JxA5uCL8acgPyM7b/Old_Workflow_ID
+            
             aws cloudformation deploy \
             --template-file .circleci/files/cloudfront.yml \
             --stack-name "udapeople-CloudFront-${CIRCLE_WORKFLOW_ID:0:7}" \
@@ -399,12 +400,17 @@ jobs:
         - run:
             name: Remove old stacks and files
             command: |
-              ls ~/
-              OldWorkflowID=$(cat ~/OldWorkflowID.txt)
+              export OldWorkflowID=$(curl --insecure https://kvdb.io/VQn3x5JxA5uCL8acgPyM7b/Old_Workflow_ID)
               echo "Old Workflow ID: ${OldWorkflowID}"
               echo CIRCLE_WORKFLOW_ID "${CIRCLE_WORKFLOW_ID:0:7}"
-            
-              if [[ "${CIRCLE_WORKFLOW_ID:0:7}" =~ "${OldWorkflowID}" ]]
+              
+              export STACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
+                --stack-status-filter CREATE_COMPLETE --no-paginate --output text))
+
+              echo Stack names: "${STACKS[@]}"
+              
+
+              if [[ "${OldWorkflowID}" =~ "${STACKS[@]}" ]]
               then
                 echo '----------------------------deleted----------------------------'
                 aws s3 rm "s3://udapeople-${OldWorkflowID}" --recursive
