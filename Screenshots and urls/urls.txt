@@ -1,3 +1,4 @@
 https://github.com/ahmeddashraff/UdacityProject3.git
-http://udapeople-cd7335f.s3-website-us-east-1.amazonaws.com/#/employees
-d2ddtsblaerrtd.cloudfront.net
+http://udapeople-8788669.s3-website-us-east-1.amazonaws.com/#/employees
+d22kw38j6qippq.cloudfront.net
+
